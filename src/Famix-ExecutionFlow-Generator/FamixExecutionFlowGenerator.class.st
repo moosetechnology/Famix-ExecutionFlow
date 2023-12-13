@@ -3,7 +3,9 @@ Class {
 	#superclass : #FamixMetamodelGenerator,
 	#instVars : [
 		'methodCall',
-		'tOfType'
+		'tOfType',
+		'directMethodCall',
+		'indirectMethodCall'
 	],
 	#category : #'Famix-ExecutionFlow-Generator'
 }
@@ -33,11 +35,29 @@ FamixExecutionFlowGenerator class >> submetamodels [
 { #category : #definition }
 FamixExecutionFlowGenerator >> defineClasses [
 
-	methodCall := builder
-		              newClassNamed: #MethodCall
-		              comment:
-			              'Represents a dynamic method call in the context of a dynamic call graph.
-This entity links a method from a Famix model to actual runtime values, capturing the details of the dynamic call during program execution.'
+	methodCall := (builder
+		               newClassNamed: #MethodCall
+		               comment:
+			               'Represents a method call in the context of a dynamic call graph.
+This entity links a method from a Famix model to actual runtime values, capturing the details of the dynamic call during program execution.')
+		              isAbstractClass: true.
+	directMethodCall := (builder
+		                     newClassNamed: #DirectMethodCall
+		                     comment:
+		                     'A call executed by a known caller, so it can be a child of a direct parent call.')
+		                    withTesting.
+	indirectMethodCall := (builder
+		                       newClassNamed: #IndirectMethodCall
+		                       comment:
+		                       'A call executed by an unknown caller, so it can be a child of an indirect parent (ancestor) call.')
+		                      withTesting
+]
+
+{ #category : #definition }
+FamixExecutionFlowGenerator >> defineHierarchy [
+
+	methodCall <|-- directMethodCall.
+	methodCall <|-- indirectMethodCall
 ]
 
 { #category : #definition }
@@ -54,16 +74,12 @@ FamixExecutionFlowGenerator >> defineProperties [
 { #category : #definition }
 FamixExecutionFlowGenerator >> defineRelations [
 
-	((methodCall property: #next) comment:
+	((methodCall property: #nextSibling) comment:
 		 'The next sibling/call in the same method context.')
-	- ((methodCall property: #previous) comment:
+	- ((methodCall property: #previousSibling) comment:
 			 'The previous sibling/call in the same method context.').
 	((methodCall property: #caller) comment: 'The calling method.')
 	*- ((methodCall property: #calls) comment: 'Methods called by me.').
-	((methodCall property: #indirectCaller) comment:
-		 'The ancestor method that leads to my call, used when the caller is unknown.')
-	*- ((methodCall property: #indirectCalls) comment:
-			 'The descendant methods that are indirectly called by me, used when the direct calls are unknown.').
 
 	"Relations to Famix"
 	((methodCall property: #method) comment: 'The called method.')

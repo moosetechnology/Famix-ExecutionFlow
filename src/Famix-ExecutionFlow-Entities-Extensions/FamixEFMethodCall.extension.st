@@ -14,10 +14,7 @@ FamixEFMethodCall >> ancestorsDo: aBlock [
 
 	caller ifNotNil: [
 		aBlock value: caller.
-		caller ancestorsDo: aBlock ].
-	indirectCaller ifNotNil: [
-		aBlock value: indirectCaller.
-		indirectCaller ancestorsDo: aBlock ]
+		caller ancestorsDo: aBlock ]
 ]
 
 { #category : #'*Famix-ExecutionFlow-Entities-Extensions' }
@@ -34,9 +31,6 @@ FamixEFMethodCall >> descendantsDo: aBlock [
 
 	calls do: [ :call |
 		aBlock value: call.
-		call descendantsDo: aBlock ].
-	indirectCalls do: [ :call |
-		aBlock value: call.
 		call descendantsDo: aBlock ]
 ]
 
@@ -52,7 +46,7 @@ FamixEFMethodCall >> following [
 { #category : #'*Famix-ExecutionFlow-Entities-Extensions' }
 FamixEFMethodCall >> followingDo: aBlock [
 
-	next ifNotNil: [ next privateFollowingDo: aBlock ].
+	nextSibling ifNotNil: [ nextSibling privateFollowingDo: aBlock ].
 	caller ifNotNil: [ caller followingDo: aBlock ]
 ]
 
@@ -70,9 +64,8 @@ FamixEFMethodCall >> followingSiblingsDo: aBlock [
 
 	| sibling |
 	sibling := self.
-	[
-	sibling := sibling next.
-	sibling isNotNil ] whileTrue: [ aBlock value: sibling ]
+	[ (sibling := sibling nextSibling) isNotNil ] whileTrue: [
+		aBlock value: sibling ]
 ]
 
 { #category : #'*Famix-ExecutionFlow-Entities-Extensions' }
@@ -106,7 +99,8 @@ FamixEFMethodCall >> preceding [
 { #category : #'*Famix-ExecutionFlow-Entities-Extensions' }
 FamixEFMethodCall >> precedingDo: aBlock [
 
-	previous ifNotNil: [ previous privatePrecedingDo: aBlock ].
+	previousSibling ifNotNil: [
+		previousSibling privatePrecedingDo: aBlock ].
 	caller ifNotNil: [ caller precedingDo: aBlock ]
 ]
 
@@ -124,9 +118,8 @@ FamixEFMethodCall >> precedingSiblingsDo: aBlock [
 
 	| sibling |
 	sibling := self.
-	[
-	sibling := sibling previous.
-	sibling isNotNil ] whileTrue: [ aBlock value: sibling ]
+	[ (sibling := sibling previousSibling) isNotNil ] whileTrue: [
+		aBlock value: sibling ]
 ]
 
 { #category : #'*Famix-ExecutionFlow-Entities-Extensions' }
@@ -134,7 +127,7 @@ FamixEFMethodCall >> privateFollowingDo: aBlock [
 
 	aBlock value: self.
 	self descendantsDo: aBlock.
-	next ifNotNil: [ next privateFollowingDo: aBlock ]
+	nextSibling ifNotNil: [ nextSibling privateFollowingDo: aBlock ]
 ]
 
 { #category : #'*Famix-ExecutionFlow-Entities-Extensions' }
@@ -143,5 +136,6 @@ FamixEFMethodCall >> privatePrecedingDo: aBlock [
 	self flag: 'Optimize descendants in reverse order (oldest to newest)'.
 	self descendants reverseDo: aBlock.
 	aBlock value: self.
-	previous ifNotNil: [ previous privatePrecedingDo: aBlock ]
+	previousSibling ifNotNil: [
+		previousSibling privatePrecedingDo: aBlock ]
 ]

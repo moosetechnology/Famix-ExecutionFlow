@@ -1,5 +1,5 @@
 "
-Represents a dynamic method call in the context of a dynamic call graph.
+Represents a method call in the context of a dynamic call graph.
 This entity links a method from a Famix model to actual runtime values, capturing the details of the dynamic call during program execution.
 "
 Class {
@@ -9,12 +9,10 @@ Class {
 		'#duration => FMProperty',
 		'#timestamp => FMProperty',
 		'#numberOfCalls => FMProperty defaultValue: 1',
-		'#next => FMOne type: #FamixEFMethodCall opposite: #previous',
-		'#previous => FMOne type: #FamixEFMethodCall opposite: #next',
+		'#nextSibling => FMOne type: #FamixEFMethodCall opposite: #previousSibling',
+		'#previousSibling => FMOne type: #FamixEFMethodCall opposite: #nextSibling',
 		'#caller => FMOne type: #FamixEFMethodCall opposite: #calls',
-		'#calls => FMMany type: #FamixEFMethodCall opposite: #caller',
-		'#indirectCaller => FMOne type: #FamixEFMethodCall opposite: #indirectCalls',
-		'#indirectCalls => FMMany type: #FamixEFMethodCall opposite: #indirectCaller'
+		'#calls => FMMany type: #FamixEFMethodCall opposite: #caller'
 	],
 	#category : #'Famix-ExecutionFlow-Entities-Entities'
 }
@@ -25,7 +23,15 @@ FamixEFMethodCall class >> annotation [
 	<FMClass: #MethodCall super: #FamixEFEntity>
 	<package: #'Famix-ExecutionFlow-Entities'>
 	<generated>
+	<abstract>
 	^ self
+]
+
+{ #category : #testing }
+FamixEFMethodCall class >> isAbstract [
+
+	<generated>
+	^ self == FamixEFMethodCall
 ]
 
 { #category : #adding }
@@ -38,12 +44,6 @@ FamixEFMethodCall >> addArgument: anObject [
 FamixEFMethodCall >> addCall: anObject [
 	<generated>
 	^ self calls add: anObject
-]
-
-{ #category : #adding }
-FamixEFMethodCall >> addIndirectCall: anObject [
-	<generated>
-	^ self indirectCalls add: anObject
 ]
 
 { #category : #accessing }
@@ -113,39 +113,6 @@ FamixEFMethodCall >> duration: anObject [
 ]
 
 { #category : #accessing }
-FamixEFMethodCall >> indirectCaller [
-	"Relation named: #indirectCaller type: #FamixEFMethodCall opposite: #indirectCalls"
-
-	<generated>
-	<FMComment: 'The ancestor method that leads to my call, used when the caller is unknown.'>
-	^ indirectCaller
-]
-
-{ #category : #accessing }
-FamixEFMethodCall >> indirectCaller: anObject [
-
-	<generated>
-	indirectCaller := anObject
-]
-
-{ #category : #accessing }
-FamixEFMethodCall >> indirectCalls [
-	"Relation named: #indirectCalls type: #FamixEFMethodCall opposite: #indirectCaller"
-
-	<generated>
-	<FMComment: 'The descendant methods that are indirectly called by me, used when the direct calls are unknown.'>
-	<derived>
-	^ indirectCalls
-]
-
-{ #category : #accessing }
-FamixEFMethodCall >> indirectCalls: anObject [
-
-	<generated>
-	indirectCalls value: anObject
-]
-
-{ #category : #accessing }
 FamixEFMethodCall >> method [
 	"Relation named: #method type: #FamixTMethod opposite: #methodCalls"
 
@@ -163,19 +130,19 @@ FamixEFMethodCall >> method: anObject [
 ]
 
 { #category : #accessing }
-FamixEFMethodCall >> next [
-	"Relation named: #next type: #FamixEFMethodCall opposite: #previous"
+FamixEFMethodCall >> nextSibling [
+	"Relation named: #nextSibling type: #FamixEFMethodCall opposite: #previousSibling"
 
 	<generated>
 	<FMComment: 'The next sibling/call in the same method context.'>
-	^ next
+	^ nextSibling
 ]
 
 { #category : #accessing }
-FamixEFMethodCall >> next: anObject [
+FamixEFMethodCall >> nextSibling: anObject [
 
 	<generated>
-	next := anObject
+	nextSibling := anObject
 ]
 
 { #category : #accessing }
@@ -194,20 +161,20 @@ FamixEFMethodCall >> numberOfCalls: anObject [
 ]
 
 { #category : #accessing }
-FamixEFMethodCall >> previous [
-	"Relation named: #previous type: #FamixEFMethodCall opposite: #next"
+FamixEFMethodCall >> previousSibling [
+	"Relation named: #previousSibling type: #FamixEFMethodCall opposite: #nextSibling"
 
 	<generated>
 	<FMComment: 'The previous sibling/call in the same method context.'>
 	<derived>
-	^ previous
+	^ previousSibling
 ]
 
 { #category : #accessing }
-FamixEFMethodCall >> previous: anObject [
+FamixEFMethodCall >> previousSibling: anObject [
 
 	<generated>
-	previous := anObject
+	previousSibling := anObject
 ]
 
 { #category : #accessing }

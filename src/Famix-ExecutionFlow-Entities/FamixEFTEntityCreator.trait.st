@@ -17,8 +17,15 @@ FamixEFTEntityCreator classSide >> annotation [
 ]
 
 { #category : #'entity creation' }
-FamixEFTEntityCreator >> newMethodCall [
+FamixEFTEntityCreator >> newDirectMethodCall [
 
 	<generated>
-	^ self add: FamixEFMethodCall new
+	^ self add: FamixEFDirectMethodCall new
+]
+
+{ #category : #'entity creation' }
+FamixEFTEntityCreator >> newIndirectMethodCall [
+
+	<generated>
+	^ self add: FamixEFIndirectMethodCall new
 ]

@@ -26,7 +26,7 @@ Class {
 { #category : #running }
 FamixEFMethodCallTest >> newCallNamed: aName [
 
-	^ FamixEFMethodCall new method: (FamixStMethod named: aName)
+	^ FamixEFDirectMethodCall new method: (FamixStMethod named: aName)
 ]
 
 { #category : #running }
@@ -61,7 +61,7 @@ FamixEFMethodCallTest >> setUp [
 		| calls |
 		calls := call calls asOrderedCollection.
 		calls withIndexDo: [ :c :i |
-			i < calls size ifTrue: [ c next: (calls at: i + 1) ] ] ]
+			i < calls size ifTrue: [ c nextSibling: (calls at: i + 1) ] ] ]
 ]
 
 { #category : #tests }

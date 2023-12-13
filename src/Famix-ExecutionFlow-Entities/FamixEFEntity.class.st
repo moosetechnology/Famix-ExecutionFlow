@@ -27,3 +27,17 @@ FamixEFEntity class >> metamodel [
 	<generated>
 	^ FamixEFModel metamodel
 ]
+
+{ #category : #testing }
+FamixEFEntity >> isDirectMethodCall [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixEFEntity >> isIndirectMethodCall [
+
+	<generated>
+	^ false
+]
