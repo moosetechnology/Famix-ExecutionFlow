@@ -12,9 +12,10 @@ FamixEFMethodCall >> ancestors [
 { #category : #'*Famix-ExecutionFlow-Entities-Extensions' }
 FamixEFMethodCall >> ancestorsDo: aBlock [
 
-	caller ifNotNil: [
-		aBlock value: caller.
-		caller ancestorsDo: aBlock ]
+	| ancestor |
+	ancestor := self.
+	[ (ancestor := ancestor caller) isNotNil ] whileTrue: [
+		aBlock value: ancestor ]
 ]
 
 { #category : #'*Famix-ExecutionFlow-Entities-Extensions' }
