@@ -5,6 +5,7 @@
 ```st
 Metacello new
   githubUser: 'moosetechnology' project: 'Famix-ExecutionFlow' commitish: 'main' path: 'src';
-  baseline: 'ExecutionFlow';
+  baseline: 'FamixExecutionFlow';
+  onConflictUseIncoming;
   load
 ```
