@@ -106,7 +106,7 @@ FamixEFMethodCallTest >> testFollowingSiblings [
 { #category : #tests }
 FamixEFMethodCallTest >> testMooseNameOn [
 
-	| method |
+	| method recvName argName resName |
 	method := origin method.
 	origin method: nil.
 
@@ -119,30 +119,32 @@ FamixEFMethodCallTest >> testMooseNameOn [
 		(FamixValueOfObject new type: (FamixJavaClass named: 'Object')).
 	self
 		assert: origin mooseName
-		equals: 'Object={0 attributes}.origin()'.
+		equals: (recvName := origin receiver mooseName) , '.origin()'.
 
 	origin addArgument: (FamixValueOfPrimitiveType new
 			 value: 42;
 			 type: (FamixJavaPrimitiveType named: 'int')).
 	self
 		assert: origin mooseName
-		equals: 'Object={0 attributes}.origin(int=42)'.
+		equals:
+			recvName , '.origin('
+			, (argName := origin arguments first mooseName) , ')'.
 
 	origin result: (FamixValueOfPrimitiveType new
 			 value: 'meaning of life';
 			 type: (FamixJavaClass named: 'String')).
 	self
 		assert: origin mooseName
-		equals:
-		'Object={0 attributes}.origin(int=42)->String=''meaning of life'''.
+		equals: recvName , '.origin(' , argName , ')->'
+			, (resName := origin result mooseName).
 
 	origin addArgument: (FamixValueOfPrimitiveType new
 			 value: true;
 			 type: (FamixJavaPrimitiveType named: 'boolean')).
 	self
 		assert: origin mooseName
-		equals:
-		'Object={0 attributes}.origin(int=42,boolean=true)->String=''meaning of life'''
+		equals: recvName , '.origin(' , argName , ','
+			, origin arguments second mooseName , ')->' , resName
 ]
 
 { #category : #tests }
