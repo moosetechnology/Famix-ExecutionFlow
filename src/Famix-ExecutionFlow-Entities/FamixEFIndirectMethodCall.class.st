@@ -1,13 +1,17 @@
 "
 A call executed by an unknown caller, so it can be a child of an indirect parent (ancestor) call.
+
+
 "
 Class {
-	#name : #FamixEFIndirectMethodCall,
-	#superclass : #FamixEFMethodCall,
-	#category : #'Famix-ExecutionFlow-Entities-Entities'
+	#name : 'FamixEFIndirectMethodCall',
+	#superclass : 'FamixEFMethodCall',
+	#category : 'Famix-ExecutionFlow-Entities-Entities',
+	#package : 'Famix-ExecutionFlow-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixEFIndirectMethodCall class >> annotation [
 
 	<FMClass: #IndirectMethodCall super: #FamixEFMethodCall>
@@ -16,7 +20,7 @@ FamixEFIndirectMethodCall class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixEFIndirectMethodCall >> isIndirectMethodCall [
 
 	<generated>
