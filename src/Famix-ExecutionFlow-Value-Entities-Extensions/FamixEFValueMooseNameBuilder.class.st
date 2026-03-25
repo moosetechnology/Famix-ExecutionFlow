@@ -3,7 +3,7 @@ Moose name builder for FamixEF entities that add value informations.
 "
 Class {
 	#name : 'FamixEFValueMooseNameBuilder',
-	#superclass : 'Object',
+	#superclass : 'FamixEFMooseNameBuilder',
 	#category : 'Famix-ExecutionFlow-Value-Entities-Extensions',
 	#package : 'Famix-ExecutionFlow-Value-Entities-Extensions'
 }
