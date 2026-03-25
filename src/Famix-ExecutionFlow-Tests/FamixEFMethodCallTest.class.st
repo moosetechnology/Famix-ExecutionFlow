@@ -2,8 +2,8 @@
 A FamixEFMethodCallTest is a test class for testing the behavior of FamixEFMethodCall
 "
 Class {
-	#name : #FamixEFMethodCallTest,
-	#superclass : #TestCase,
+	#name : 'FamixEFMethodCallTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'parent',
 		'child',
@@ -20,16 +20,17 @@ Class {
 		'following',
 		'ancestor'
 	],
-	#category : #'Famix-ExecutionFlow-Tests'
+	#category : 'Famix-ExecutionFlow-Tests',
+	#package : 'Famix-ExecutionFlow-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixEFMethodCallTest >> newCallNamed: aName [
 
 	^ FamixEFDirectMethodCall new method: (FamixStMethod named: aName)
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixEFMethodCallTest >> setUp [
 
 	super setUp.
@@ -64,7 +65,7 @@ FamixEFMethodCallTest >> setUp [
 			i < calls size ifTrue: [ c nextSibling: (calls at: i + 1) ] ] ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixEFMethodCallTest >> testAncestors [
 
 	| ancestors |
@@ -74,7 +75,7 @@ FamixEFMethodCallTest >> testAncestors [
 			ancestor } asOrderedCollection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixEFMethodCallTest >> testDescendants [
 
 	| descendants |
@@ -85,7 +86,7 @@ FamixEFMethodCallTest >> testDescendants [
 			descendant2 } asOrderedCollection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixEFMethodCallTest >> testFollowing [
 
 	self assertCollection: origin following equals: {
@@ -95,7 +96,7 @@ FamixEFMethodCallTest >> testFollowing [
 			following } asOrderedCollection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixEFMethodCallTest >> testFollowingSiblings [
 
 	self assertCollection: origin followingSiblings equals: {
@@ -103,51 +104,7 @@ FamixEFMethodCallTest >> testFollowingSiblings [
 			fSibling2 } asOrderedCollection
 ]
 
-{ #category : #tests }
-FamixEFMethodCallTest >> testMooseNameOn [
-
-	| method recvName argName resName |
-	method := origin method.
-	origin method: nil.
-
-	self assert: origin mooseName equals: '<unknownMethod>()'.
-
-	origin method: method.
-	self assert: origin mooseName equals: 'origin()'.
-
-	origin receiver:
-		(FamixValueOfObject new type: (FamixJavaClass named: 'Object')).
-	self
-		assert: origin mooseName
-		equals: (recvName := origin receiver mooseName) , '.origin()'.
-
-	origin addArgument: (FamixValueOfPrimitiveType new
-			 value: 42;
-			 type: (FamixJavaPrimitiveType named: 'int')).
-	self
-		assert: origin mooseName
-		equals:
-			recvName , '.origin('
-			, (argName := origin arguments first mooseName) , ')'.
-
-	origin result: (FamixValueOfPrimitiveType new
-			 value: 'meaning of life';
-			 type: (FamixJavaClass named: 'String')).
-	self
-		assert: origin mooseName
-		equals: recvName , '.origin(' , argName , ')->'
-			, (resName := origin result mooseName).
-
-	origin addArgument: (FamixValueOfPrimitiveType new
-			 value: true;
-			 type: (FamixJavaPrimitiveType named: 'boolean')).
-	self
-		assert: origin mooseName
-		equals: recvName , '.origin(' , argName , ','
-			, origin arguments second mooseName , ')->' , resName
-]
-
-{ #category : #tests }
+{ #category : 'tests' }
 FamixEFMethodCallTest >> testPreceding [
 
 	self assertCollection: origin preceding equals: {
@@ -157,7 +114,7 @@ FamixEFMethodCallTest >> testPreceding [
 			preceding } asOrderedCollection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixEFMethodCallTest >> testPrecedingSiblings [
 
 	self assertCollection: origin precedingSiblings equals: {

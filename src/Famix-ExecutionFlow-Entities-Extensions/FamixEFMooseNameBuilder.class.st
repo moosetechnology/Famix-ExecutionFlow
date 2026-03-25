@@ -33,7 +33,12 @@ FamixEFMooseNameBuilder class >> initialize [
 { #category : 'printing' }
 FamixEFMooseNameBuilder >> mooseNameOfMethodCall: methodCall on: aStream [
 
-	aStream nextPutAll: (methodCall method
-			 ifNotNil: [ :method | method name ]
-			 ifNil: [ '<unknownMethod>' ])
+	methodCall method
+		ifNil: [ aStream nextPutAll: '<method?>' ]
+		ifNotNil: [ :method |
+			aStream nextPutAll: (method parentType
+					 ifNil: [ '<container?>' ]
+					 ifNotNil: [ :container | container mooseNameOn: aStream ]).
+			aStream nextPut: $..
+			aStream nextPutAll: method name ]
 ]

@@ -1,53 +1,50 @@
 Class {
 	#name : 'FamixEFValueMooseNameBuilderTest',
-	#superclass : 'TestCase',
-	#instVars : [
-		'methodCall'
-	],
+	#superclass : 'FamixEFMooseNameBuilderAbstractTest',
 	#category : 'Famix-ExecutionFlow-Value-Tests',
 	#package : 'Famix-ExecutionFlow-Value-Tests'
 }
 
-{ #category : 'running' }
-FamixEFValueMooseNameBuilderTest >> setUp [
+{ #category : 'configuring' }
+FamixEFValueMooseNameBuilderTest >> builder [
 
-	super setUp.
-	methodCall := FamixEFDirectMethodCall new method:
-		              (FamixStMethod named: 'origin')
+	^ FamixEFValueMooseNameBuilder new
 ]
 
-{ #category : 'nil' }
+{ #category : 'tests' }
 FamixEFValueMooseNameBuilderTest >> testMooseNameOn [
 
-	self assert: methodCall mooseName equals: 'origin()'
+	self assert: self buildMooseName equals: '<container?>.origin()'
 ]
 
 { #category : 'tests' }
 FamixEFValueMooseNameBuilderTest >> testMooseNameOnArgument [
 
-	methodCall addArgument: (FamixValueOfPrimitiveType new
+	methodCall arguments: { (FamixValueOfPrimitiveType new
 			 value: 42;
-			 type: (FamixJavaPrimitiveType named: 'int')).
+			 type: (FamixJavaPrimitiveType named: 'int')) }.
 
 	self
-		assert: methodCall mooseName
-		equals: 'origin(' , methodCall arguments first mooseName , ')'
+		assert: self buildMooseName
+		equals:
+		'<container?>.origin(' , methodCall arguments first mooseName , ')'
 ]
 
-{ #category : 'nil' }
+{ #category : 'tests' }
 FamixEFValueMooseNameBuilderTest >> testMooseNameOnArgumentResult [
 
-	methodCall addArgument: (FamixValueOfPrimitiveType new
+	methodCall arguments: { (FamixValueOfPrimitiveType new
 			 value: 42;
-			 type: (FamixJavaPrimitiveType named: 'int')).
+			 type: (FamixJavaPrimitiveType named: 'int')) }.
 	methodCall result: (FamixValueOfPrimitiveType new
 			 value: 'meaning of life';
 			 type: (FamixJavaClass named: 'String')).
 
 	self
-		assert: methodCall mooseName
-		equals: 'origin(' , methodCall arguments first mooseName , ')->'
-			, methodCall result mooseName
+		assert: self buildMooseName
+		equals:
+			'<container?>.origin(' , methodCall arguments first mooseName
+			, ')->' , methodCall result mooseName
 ]
 
 { #category : 'tests' }
@@ -57,7 +54,7 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOnReceiver [
 		(FamixValueOfObject new type: (FamixJavaClass named: 'Object')).
 
 	self
-		assert: methodCall mooseName
+		assert: self buildMooseName
 		equals: methodCall receiver mooseName , '.origin()'
 ]
 
@@ -66,36 +63,36 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOnReceiverArgument [
 
 	methodCall receiver:
 		(FamixValueOfObject new type: (FamixJavaClass named: 'Object')).
-	methodCall addArgument: (FamixValueOfPrimitiveType new
+	methodCall arguments: { (FamixValueOfPrimitiveType new
 			 value: 42;
-			 type: (FamixJavaPrimitiveType named: 'int')).
+			 type: (FamixJavaPrimitiveType named: 'int')) }.
 
 	self
-		assert: methodCall mooseName
+		assert: self buildMooseName
 		equals: methodCall receiver mooseName , '.origin('
 			, methodCall arguments first mooseName , ')'
 ]
 
-{ #category : 'nil' }
+{ #category : 'tests' }
 FamixEFValueMooseNameBuilderTest >> testMooseNameOnReceiverArgumentResult [
 
 	methodCall receiver:
 		(FamixValueOfObject new type: (FamixJavaClass named: 'Object')).
-	methodCall addArgument: (FamixValueOfPrimitiveType new
+	methodCall arguments: { (FamixValueOfPrimitiveType new
 			 value: 42;
-			 type: (FamixJavaPrimitiveType named: 'int')).
+			 type: (FamixJavaPrimitiveType named: 'int')) }.
 	methodCall result: (FamixValueOfPrimitiveType new
 			 value: 'meaning of life';
 			 type: (FamixJavaClass named: 'String')).
 
 	self
-		assert: methodCall mooseName
+		assert: self buildMooseName
 		equals: methodCall receiver mooseName , '.origin('
 			, methodCall arguments first mooseName , ')->'
 			, methodCall result mooseName
 ]
 
-{ #category : 'nil' }
+{ #category : 'tests' }
 FamixEFValueMooseNameBuilderTest >> testMooseNameOnReceiverResult [
 
 	methodCall receiver:
@@ -105,35 +102,36 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOnReceiverResult [
 			 type: (FamixJavaClass named: 'String')).
 
 	self
-		assert: methodCall mooseName
+		assert: self buildMooseName
 		equals: methodCall receiver mooseName , '.origin()->'
 			, methodCall result mooseName
 ]
 
-{ #category : 'nil' }
+{ #category : 'tests' }
 FamixEFValueMooseNameBuilderTest >> testMooseNameOnReceiverTwoArgumentsResult [
 
 	methodCall receiver:
 		(FamixValueOfObject new type: (FamixJavaClass named: 'Object')).
-	methodCall addArgument: (FamixValueOfPrimitiveType new
-			 value: 42;
-			 type: (FamixJavaPrimitiveType named: 'int')).
-	methodCall addArgument: (FamixValueOfPrimitiveType new
-			 value: true;
-			 type: (FamixJavaPrimitiveType named: 'boolean')).
+	methodCall arguments: {
+			(FamixValueOfPrimitiveType new
+				 value: 42;
+				 type: (FamixJavaPrimitiveType named: 'int')).
+			(FamixValueOfPrimitiveType new
+				 value: true;
+				 type: (FamixJavaPrimitiveType named: 'boolean')) }.
 	methodCall result: (FamixValueOfPrimitiveType new
 			 value: 'meaning of life';
 			 type: (FamixJavaClass named: 'String')).
 
 	self
-		assert: methodCall mooseName
+		assert: self buildMooseName
 		equals: methodCall receiver mooseName , '.origin('
 			, methodCall arguments first mooseName , ','
 			, methodCall arguments second mooseName , ')->'
 			, methodCall result mooseName
 ]
 
-{ #category : 'nil' }
+{ #category : 'tests' }
 FamixEFValueMooseNameBuilderTest >> testMooseNameOnResult [
 
 	methodCall result: (FamixValueOfPrimitiveType new
@@ -141,13 +139,13 @@ FamixEFValueMooseNameBuilderTest >> testMooseNameOnResult [
 			 type: (FamixJavaClass named: 'String')).
 
 	self
-		assert: methodCall mooseName
-		equals: 'origin()->' , methodCall result mooseName
+		assert: self buildMooseName
+		equals: '<container?>.origin()->' , methodCall result mooseName
 ]
 
 { #category : 'tests' }
 FamixEFValueMooseNameBuilderTest >> testMooseNameOnUnknownMethod [
 
 	methodCall method: nil.
-	self assert: methodCall mooseName equals: '<unknownMethod>()'
+	self assert: self buildMooseName equals: '<method?>()'
 ]
