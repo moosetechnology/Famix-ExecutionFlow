@@ -10,7 +10,10 @@ SmalltalkCISpec {
   ],
   #testing : {
     #coverage : {
-      #packages : [ 'Famix-ExecutionFlow-.*' ],
+      #packages : [
+        'Famix-ExecutionFlow-Entities-Extensions',
+        'Famix-ExecutionFlow-Value-Entities-Extensions'
+      ],
       #format : #lcov
     }
   }
