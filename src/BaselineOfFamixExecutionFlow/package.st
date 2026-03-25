@@ -1,1 +1,1 @@
-Package { #name : #BaselineOfFamixExecutionFlow }
+Package { #name : 'BaselineOfFamixExecutionFlow' }

@@ -1,1 +1,1 @@
-Package { #name : #'Famix-ExecutionFlow-Generator' }
+Package { #name : 'Famix-ExecutionFlow-Generator' }

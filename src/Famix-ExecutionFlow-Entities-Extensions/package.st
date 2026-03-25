@@ -1,1 +1,1 @@
-Package { #name : #'Famix-ExecutionFlow-Entities-Extensions' }
+Package { #name : 'Famix-ExecutionFlow-Entities-Extensions' }
