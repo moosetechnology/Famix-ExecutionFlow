@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixEFEntity,
-	#superclass : #MooseEntity,
-	#category : #'Famix-ExecutionFlow-Entities-Entities'
+	#name : 'FamixEFEntity',
+	#superclass : 'MooseEntity',
+	#category : 'Famix-ExecutionFlow-Entities-Entities',
+	#package : 'Famix-ExecutionFlow-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixEFEntity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
@@ -14,28 +16,28 @@ FamixEFEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixEFEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixEFEntity
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixEFEntity class >> metamodel [
 
 	<generated>
 	^ FamixEFModel metamodel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixEFEntity >> isDirectMethodCall [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixEFEntity >> isIndirectMethodCall [
 
 	<generated>

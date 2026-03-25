@@ -17,6 +17,13 @@ FamixExecutionFlowValueGenerator class >> packageName [
 ]
 
 { #category : 'accessing' }
+FamixExecutionFlowValueGenerator class >> prefix [
+
+	<ignoreForCoverage>
+	^ #FamixEFV
+]
+
+{ #category : 'accessing' }
 FamixExecutionFlowValueGenerator class >> submetamodels [
 
 	^ {

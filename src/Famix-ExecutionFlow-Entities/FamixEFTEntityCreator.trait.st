@@ -1,13 +1,17 @@
 "
 This trait is used by Famix models.
 It provides an API for creating entities and adding them to the model.
+
+
 "
 Trait {
-	#name : #FamixEFTEntityCreator,
-	#category : #'Famix-ExecutionFlow-Entities-Model'
+	#name : 'FamixEFTEntityCreator',
+	#category : 'Famix-ExecutionFlow-Entities-Model',
+	#package : 'Famix-ExecutionFlow-Entities',
+	#tag : 'Model'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixEFTEntityCreator classSide >> annotation [
 
 	<FMClass: #TEntityCreator super: #Object>
@@ -16,14 +20,14 @@ FamixEFTEntityCreator classSide >> annotation [
 	^ self
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixEFTEntityCreator >> newDirectMethodCall [
 
 	<generated>
 	^ self add: FamixEFDirectMethodCall new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixEFTEntityCreator >> newIndirectMethodCall [
 
 	<generated>

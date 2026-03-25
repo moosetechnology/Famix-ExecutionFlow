@@ -1,6 +1,6 @@
-Extension { #name : #FamixTMethod }
+Extension { #name : 'FamixTMethod' }
 
-{ #category : #'*Famix-ExecutionFlow-Entities-accessing' }
+{ #category : '*Famix-ExecutionFlow-Entities-accessing' }
 FamixTMethod >> methodCalls [
 	"Relation named: #methodCalls type: #FamixEFMethodCall opposite: #method"
 
@@ -12,7 +12,7 @@ FamixTMethod >> methodCalls [
 	^ self attributeAt: #methodCalls ifAbsentPut: [ FMMultivalueLink on: self opposite: #method: ]
 ]
 
-{ #category : #'*Famix-ExecutionFlow-Entities-accessing' }
+{ #category : '*Famix-ExecutionFlow-Entities-accessing' }
 FamixTMethod >> methodCalls: anObject [
 
 	<generated>

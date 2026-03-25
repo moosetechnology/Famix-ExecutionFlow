@@ -1,13 +1,17 @@
 "
 A call executed by a known caller, so it can be a child of a direct parent call.
+
+
 "
 Class {
-	#name : #FamixEFDirectMethodCall,
-	#superclass : #FamixEFMethodCall,
-	#category : #'Famix-ExecutionFlow-Entities-Entities'
+	#name : 'FamixEFDirectMethodCall',
+	#superclass : 'FamixEFMethodCall',
+	#category : 'Famix-ExecutionFlow-Entities-Entities',
+	#package : 'Famix-ExecutionFlow-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixEFDirectMethodCall class >> annotation [
 
 	<FMClass: #DirectMethodCall super: #FamixEFMethodCall>
@@ -16,7 +20,7 @@ FamixEFDirectMethodCall class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixEFDirectMethodCall >> isDirectMethodCall [
 
 	<generated>
