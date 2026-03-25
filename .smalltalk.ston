@@ -1,0 +1,16 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'FamixExecutionFlow',
+      #onConflict : #useIncoming,
+      #directory : 'src',
+      #platforms : [ #pharo ]
+    }
+  ],
+  #testing : {
+    #coverage : {
+      #packages : [ 'Famix-ExecutionFlow-.*' ],
+      #format : #lcov
+    }
+  }
+}

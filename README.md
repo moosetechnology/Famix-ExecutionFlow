@@ -1,3 +1,8 @@
+[![Moose version](https://img.shields.io/badge/Moose-10-%23aac9ff.svg)](https://modularmoose.org/)
+[![Moose version](https://img.shields.io/badge/Moose-11-%23aac9ff.svg)](https://github.com/moosetechnology/Moose)
+![Build Info](https://github.com/moosetechnology/Famix-ExecutionFlow/workflows/CI/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/moosetechnology/Famix-ExecutionFlow/badge.svg?branch=main)](https://coveralls.io/github/moosetechnology/Famix-ExecutionFlow?branch=main)
+
 # Famix-ExecutionFlow
 
 Metamodel to represent static or dynamic callgraphs.
