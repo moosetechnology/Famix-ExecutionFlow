@@ -55,6 +55,8 @@ BaselineOfFamixExecutionFlow >> packages: spec [
 		package: 'Famix-ExecutionFlow-Value-Entities'
 		with: [
 			spec requires: #( 'FamixValue' 'Famix-ExecutionFlow-Entities' ) ];
+		package: 'Famix-ExecutionFlow-Value-Entities-Extensions'
+		with: [ spec requires: #( 'Famix-ExecutionFlow-Value-Entities' ) ];
 		package: 'Famix-ExecutionFlow-Value-Generator'
 		with: [
 			spec requires: #( 'FamixValue' 'Famix-ExecutionFlow-Generator' ) ];
