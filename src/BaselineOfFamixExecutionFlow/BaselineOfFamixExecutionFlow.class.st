@@ -34,6 +34,7 @@ BaselineOfFamixExecutionFlow >> groups: spec [
 			   'Famix-ExecutionFlow-Generator' 'Famix-ExecutionFlow-Tests' );
 		group: 'value'
 		with: #( 'default' 'Famix-ExecutionFlow-Value-Entities'
+			   'Famix-ExecutionFlow-Value-Entities-Extensions'
 			   'Famix-ExecutionFlow-Value-Generator'
 			   'Famix-ExecutionFlow-Value-Tests' )
 ]
